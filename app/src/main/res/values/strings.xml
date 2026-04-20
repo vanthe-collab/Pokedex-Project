@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="nav_pokedex">Pokedex</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_favorite">Favorite</string>
+    <string name="nav_move_items">Move/Items</string>
+    <string name="nav_teams">My teams</string>
+    <string name="fl_search">Search pokemon</string>
+</resources>
