@@ -14,7 +14,7 @@
         android:title="@string/nav_favorite" />
     <item
         android:id="@+id/nav_team"
-        android:icon="@drawable/doi_hinh"
+        android:icon="@drawable/teams"
         android:title="@string/nav_teams" />
     <item
         android:id="@+id/nav_settings"
