@@ -6,4 +6,8 @@
     <string name="nav_move_items">Move/Items</string>
     <string name="nav_teams">My teams</string>
     <string name="fl_search">Search pokemon</string>
+    <string name="demo_pokemon">Squirtle</string>
+    <string name="demo_id_pokemon">#007</string>
+    <string name="pokemon_type1">Water</string>
+    <string name="pokemon_type2">Poison</string>
 </resources>
