@@ -8,10 +8,10 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
-import com.example.pokedex.databinding.ItemRvPokemonBinding
+import com.example.pokedex.databinding.ItemPokemonCustomviewBinding
 
 class PokemonCardView : CardView {
-    private lateinit var binding: ItemRvPokemonBinding
+    private lateinit var binding: ItemPokemonCustomviewBinding
 
     //tạo đối tượng ủy quyền
     private var delegateDetailPokemon: DetailPokemon? = null
@@ -26,7 +26,7 @@ class PokemonCardView : CardView {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        binding = ItemRvPokemonBinding.inflate(LayoutInflater.from(context), this, true)
+        binding = ItemPokemonCustomviewBinding.inflate(LayoutInflater.from(context), this, true)
         this.setOnClickListener { view ->
             delegateDetailPokemon?.clickDetailPokemon(currentId, currentName)
         }

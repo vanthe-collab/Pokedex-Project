@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.APIService.Apipokemon
 import com.example.pokedex.Model.DataPokemon
 import com.example.pokedex.Model.PokemonResponse
 import com.example.pokedex.adapters.PokemonAdapter
 import com.example.pokedex.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Call
@@ -22,6 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var currentOffset = 0
+    private var limit = 20
+    private var isLoading = false //có đang bận tải ko, tránh trường hợp user vuôt nhanh quá
+
+    private var listSumary = ArrayList<DataPokemon>()
+    private lateinit var adapter: PokemonAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -31,9 +40,11 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.itemIconTintList = null
 
         getAPI()
+        ScrollDown()
     }
 
     fun getAPI() {
+        isLoading = true
         val retrofit = Retrofit.Builder().baseUrl(Apipokemon.BASE_URL).addConverterFactory(
             GsonConverterFactory.create()
         ).build()
@@ -42,37 +53,70 @@ class MainActivity : AppCompatActivity() {
 
         //gọi courountines xử lý bất đồng bộ
         lifecycleScope.launch(Dispatchers.IO) {
-            val responeList = apiPokemon.getPokemonList(100, 0)
+            val responseList = apiPokemon.getPokemonList(limit, currentOffset)
+            if (responseList.isSuccessful && responseList.body() != null) {
+                val listDataRaw = responseList.body()!!.results
+                val listDataFormated = listDataRaw.map { item ->
+                    async {
+                        val responseDetail = apiPokemon.getPokemonDetail(item.url)
+                        if (responseDetail.isSuccessful && responseDetail.body() != null) {
+                            val detail = responseDetail.body()!!
 
-            if (responeList.isSuccessful && responeList.body() != null) {
-                val listDataRaw = responeList.body()!!.results
-                val listDataFormated = ArrayList<DataPokemon>()
-                for (item in listDataRaw) {
-                    val responseDetail = apiPokemon.getPokemonDetail(item.url)
+                            DataPokemon(
+                                detail.id,
+                                detail.name.replaceFirstChar { it.uppercase() },
+                                detail.getSimpleTypes(),
+                                detail.getOfficialImageUrl()
+                            )
 
-                    if (responseDetail.isSuccessful && responseDetail.body() != null) {
-                        val detail = responseDetail.body()!!
-
-                        val PokemonGreat = DataPokemon(
-                            detail.id,
-                            detail.name.replaceFirstChar { it.uppercase() },
-                            detail.getSimpleTypes(),
-                            detail.getOfficialImageUrl()
-                        )
-                        listDataFormated.add(PokemonGreat)
+                        } else {
+                            //nếu có pokemon nào bị lỗi thì gán băng null
+                            null
+                        }
                     }
-                }
+                }.awaitAll() //làm xong tất cả rồi gom tất cả Data thành 1 cục
+
+                val listNewPokemon = listDataFormated.filterNotNull()
                 withContext(Dispatchers.Main) {
-                    val adapter = PokemonAdapter(listDataFormated)
-                    binding.rvPokemonList.layoutManager = GridLayoutManager(
-                        this@MainActivity, 2,
-                        GridLayoutManager.VERTICAL, false
-                    )
-                    binding.rvPokemonList.adapter = adapter
+                    val oldSize = listSumary.size
+                    listSumary.addAll(listNewPokemon)
+                    if (currentOffset == 0) {
+                        adapter = PokemonAdapter(listSumary)
+                        binding.rvPokemonList.layoutManager = GridLayoutManager(
+                            this@MainActivity, 2,
+                            GridLayoutManager.VERTICAL, false
+                        )
+                        binding.rvPokemonList.adapter = adapter
+                    } else {
+                        adapter.notifyItemRangeInserted(oldSize, listNewPokemon.size)
+                    }
+                    isLoading = false
                 }
             }
         }
 
 
+    }
+
+    //hàm bắt sự kiện cuộn xuống đáy màn hình
+    fun ScrollDown() {
+        binding.rvPokemonList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 0) { //kiem tra co cuon xuong hay ko
+                    val layoutManger = recyclerView.layoutManager as GridLayoutManager
+                    val visibleItemCount = layoutManger.childCount
+                    val totalItemCount = layoutManger.itemCount
+                    val pasVisibleItems = layoutManger.findFirstVisibleItemPosition()
+                    if (!isLoading) {
+                        if ((visibleItemCount + pasVisibleItems) >= totalItemCount){
+                            currentOffset += limit
+                            getAPI()
+                        }
+                    }
+                }
+            }
+        })
     }
 }
