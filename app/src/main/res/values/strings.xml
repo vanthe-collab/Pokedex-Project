@@ -10,4 +10,5 @@
     <string name="demo_id_pokemon">#007</string>
     <string name="pokemon_type1">Water</string>
     <string name="pokemon_type2">Poison</string>
+    <string name="pokedex">POKÉDEX</string>
 </resources>

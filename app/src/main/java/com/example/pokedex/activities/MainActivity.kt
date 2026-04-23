@@ -3,13 +3,12 @@ package com.example.pokedex.activities
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.APIService.Apipokemon
 import com.example.pokedex.Model.DataPokemon
-import com.example.pokedex.Model.PokemonResponse
 import com.example.pokedex.adapters.PokemonAdapter
 import com.example.pokedex.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
@@ -17,9 +16,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.pokedex.R
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,6 +39,11 @@ class MainActivity : AppCompatActivity() {
 
         getAPI()
         ScrollDown()
+
+        // --- BẮT SỰ KIỆN MENU TRƯỢT ---
+        binding.topAppBar.setNavigationOnClickListener {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
     }
 
     fun getAPI() {
@@ -110,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                     val totalItemCount = layoutManger.itemCount
                     val pasVisibleItems = layoutManger.findFirstVisibleItemPosition()
                     if (!isLoading) {
-                        if ((visibleItemCount + pasVisibleItems) >= totalItemCount){
+                        if ((visibleItemCount + pasVisibleItems) >= totalItemCount) {
                             currentOffset += limit
                             getAPI()
                         }
@@ -119,4 +122,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+
 }

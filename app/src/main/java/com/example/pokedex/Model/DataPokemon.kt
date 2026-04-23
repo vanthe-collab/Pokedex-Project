@@ -1,5 +1,7 @@
 package com.example.pokedex.Model
+
 import com.google.gson.annotations.SerializedName
+
 //Dành cho apdater
 data class DataPokemon(
     val id: Int,
@@ -29,7 +31,8 @@ data class PokemonDetailResponse(
 ) {
     // Rút gọn link ảnh
     fun getOfficialImageUrl(): String {
-        return sprites.other.officialArtwork.frontDefault
+        return sprites.other?.officialArtwork?.frontDefault ?: sprites.frontDefault
+        ?: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
     }
 
     //Biến mảng Object thành mảng chữ ["Fire", "Flying"]
@@ -41,9 +44,13 @@ data class PokemonDetailResponse(
 // CÁC CLASS PHỤ TRỢ ĐỂ BÓC TÁCH JSON LỒNG NHAU
 
 // Dành cho việc tách ảnh
-data class Sprites(val other: OtherSprites)
-data class OtherSprites(@SerializedName("official-artwork") val officialArtwork: OfficialArtwork)
-data class OfficialArtwork(@SerializedName("front_default") val frontDefault: String)
+data class Sprites(
+    @SerializedName("front_default") // đề phòng ảnh offical-art ko có trong API, chèn ảnh pixel vào
+    val frontDefault: String?, val other: OtherSprites?
+)
+
+data class OtherSprites(@SerializedName("official-artwork") val officialArtwork: OfficialArtwork?)
+data class OfficialArtwork(@SerializedName("front_default") val frontDefault: String?)
 
 // Dành cho việc bóc tách Hệ
 data class TypeSlot(val type: TypeDetail)
