@@ -1,7 +1,5 @@
 package com.example.pokedex.Model
-
 import com.google.gson.annotations.SerializedName
-
 //Dành cho apdater
 data class DataPokemon(
     val id: Int,
