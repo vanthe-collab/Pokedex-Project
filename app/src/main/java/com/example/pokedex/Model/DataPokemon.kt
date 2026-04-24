@@ -11,7 +11,7 @@ data class DataPokemon(
 )
 
 
-// === Dành để hứng dữ liệu từ API ===
+// Dành để hứng dữ liệu từ API
 data class PokemonResponse(
     val results: List<PokemonListItem>
 )

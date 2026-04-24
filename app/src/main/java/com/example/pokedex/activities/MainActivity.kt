@@ -1,9 +1,7 @@
 package com.example.pokedex.activities
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,8 +14,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.example.pokedex.R
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -39,11 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         getAPI()
         ScrollDown()
-
-        // --- BẮT SỰ KIỆN MENU TRƯỢT ---
-        binding.topAppBar.setNavigationOnClickListener {
-            binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
     }
 
     fun getAPI() {
