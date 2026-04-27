@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailRootLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/btnBack"
@@ -55,8 +55,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cvContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="220dp"
+            android:layout_marginBottom="-50dp"
             app:cardCornerRadius="40dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -64,11 +65,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingHorizontal="24dp"
                 android:paddingTop="20dp"
-                android:paddingBottom="40dp">
+                android:paddingBottom="90dp">
 
                 <LinearLayout
                     android:id="@+id/layoutTypes"
@@ -85,7 +86,7 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="6dp"
                         android:text="@string/pokemon_type1"
-                        android:textColor="@android:color/black"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -98,7 +99,7 @@
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="6dp"
                         android:text="@string/pokemon_type2"
-                        android:textColor="@android:color/black"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -111,9 +112,9 @@
                     android:background="@android:color/transparent"
                     app:tabIndicatorColor="#FF5959"
                     app:tabIndicatorHeight="3dp"
-                    app:tabSelectedTextColor="#333333"
+                    app:tabSelectedTextColor="?android:attr/textColorPrimary"
                     app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:tabTextColor="#888888" />
+                    app:tabTextColor="?android:attr/textColorSecondary" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPager"

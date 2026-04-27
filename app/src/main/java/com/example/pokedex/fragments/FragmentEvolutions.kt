@@ -59,7 +59,6 @@ class FragmentEvolutions : Fragment(R.layout.fragment_evolution) {
                             currentChain = currentChain.evolves_to.firstOrNull()
                         }
                         withContext(Dispatchers.Main) {
-                            binding.tvEvolutionTitle.text = evoList[0].name
                             val adapter = PokemonEvolutionChainAdapter(evoList)
                             binding.rvEvolution.layoutManager = LinearLayoutManager(
                                 view.context,

@@ -26,4 +26,5 @@
     <string name="weightValue">90.5 kg</string>
     <string name="abilityValue">Blaze, Solar Power</string>
     <string name="evolution_chain">Evolution Chain</string>
+    <string name="Description_pokemon">Đây là phần tiểu sử của Pokemon. Nó sẽ dài khoảng 2-3 dòng gì đó.</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.pokedex.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -23,9 +24,15 @@ class PokemonEvolutionChainAdapter(private val list: List<EvolutionItem>) :
         holder: ViewHolder,
         position: Int
     ) {
+        if (position == list.size - 1) {
+            holder.binding.ivArrow.visibility = View.GONE
+        } else {
+            holder.binding.ivArrow.visibility = View.VISIBLE
+        }
         val viTri = list[position]
         holder.binding.tvEvoName.text = viTri.name
         Glide.with(holder.itemView.context).load(viTri.imageUrl).into(holder.binding.ivEvoPokemon)
+
     }
 
     override fun getItemCount(): Int {

@@ -9,8 +9,8 @@
     android:padding="8dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
         app:cardUseCompatPadding="true">
@@ -19,7 +19,7 @@
             android:id="@+id/ivEvoPokemon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F5F5F5"
+            android:background="@android:color/transparent"
             android:padding="16dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -30,12 +30,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="#333333"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
         android:text="@string/demo_pokemon" />
 
     <ImageView
+        android:id="@+id/ivArrow"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="8dp"
