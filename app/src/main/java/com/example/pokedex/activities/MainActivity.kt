@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pokedex.APIService.Apipokemon
+import com.example.pokedex.APIService.APIPokemon
 import com.example.pokedex.Model.DataPokemon
 import com.example.pokedex.adapters.PokemonAdapter
 import com.example.pokedex.databinding.ActivityMainBinding
@@ -39,11 +39,11 @@ class MainActivity : AppCompatActivity() {
 
     fun getAPI() {
         isLoading = true
-        val retrofit = Retrofit.Builder().baseUrl(Apipokemon.BASE_URL).addConverterFactory(
+        val retrofit = Retrofit.Builder().baseUrl(APIPokemon.BASE_URL).addConverterFactory(
             GsonConverterFactory.create()
         ).build()
 
-        val apiPokemon = retrofit.create(Apipokemon::class.java)
+        val apiPokemon = retrofit.create(APIPokemon::class.java)
 
         //gọi courountines xử lý bất đồng bộ
         lifecycleScope.launch(Dispatchers.IO) {

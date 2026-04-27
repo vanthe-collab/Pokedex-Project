@@ -13,23 +13,9 @@ import com.example.pokedex.databinding.ItemPokemonCustomviewBinding
 class PokemonCardView : CardView {
     private lateinit var binding: ItemPokemonCustomviewBinding
 
-    //tạo đối tượng ủy quyền
-    private var delegateDetailPokemon: DetailPokemon? = null
-
-    //truy cập vào biến ủy quyền
-    fun setDelegate(delegateDetailPokemon: DetailPokemon) {
-        this.delegateDetailPokemon = delegateDetailPokemon
-    }
-
-    private var currentId = -1
-    private var currentName = ""
-
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         binding = ItemPokemonCustomviewBinding.inflate(LayoutInflater.from(context), this, true)
-        this.setOnClickListener { view ->
-            delegateDetailPokemon?.clickDetailPokemon(currentId, currentName)
-        }
     }
 
     //hứng dữ liệu từ cardView Item_rv_pokemon
@@ -52,8 +38,6 @@ class PokemonCardView : CardView {
             //Không có hệ thứ 2, ẩn đi
             binding.tvType2.visibility = View.GONE
         }
-        currentId = iD
-        currentName = name
         setColorBackGround(listTypePokemon)
     }
 
@@ -84,10 +68,5 @@ class PokemonCardView : CardView {
         // Đổi từ ID tài nguyên (colorResId) sang mã màu thật (ARGB)
         val mauThucTe = ContextCompat.getColor(context, colorResId)
         this.setCardBackgroundColor(mauThucTe)
-    }
-
-
-    interface DetailPokemon {
-        fun clickDetailPokemon(id: Int, name: String)
     }
 }

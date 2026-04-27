@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="24dp">
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="4dp"
+        android:textAlignment="center"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Đây là phần tiểu sử của Pokemon. Nó sẽ dài khoảng 2-3 dòng gì đó." />
+
+    <TextView
+        android:id="@+id/labelHeight"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/height"
+        android:textColor="#888888"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+    <TextView
+        android:id="@+id/tvHeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/heightValue"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/labelHeight"
+        app:layout_constraintTop_toTopOf="@id/labelHeight" />
+
+    <TextView
+        android:id="@+id/labelWeight"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/weight"
+        android:textColor="#888888"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelHeight" />
+
+    <TextView
+        android:id="@+id/tvWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/weightValue"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/labelWeight"
+        app:layout_constraintTop_toTopOf="@id/labelWeight" />
+
+    <TextView
+        android:id="@+id/labelAbilities"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/ability"
+        android:textColor="#888888"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelWeight" />
+
+    <TextView
+        android:id="@+id/tvAbility"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/abilityValue"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/labelAbilities"
+        app:layout_constraintTop_toTopOf="@id/labelAbilities" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

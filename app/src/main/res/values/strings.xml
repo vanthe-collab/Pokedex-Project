@@ -11,4 +11,19 @@
     <string name="pokemon_type1">Water</string>
     <string name="pokemon_type2">Poison</string>
     <string name="pokedex">POKÉDEX</string>
+    <string name="height">height</string>
+    <string name="weight">weight</string>
+    <string name="ability">ability</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="stat_hp">HP</string>
+    <string name="stat_acttack">Attack</string>
+    <string name="stat_def">Defense</string>
+    <string name="sp_atk">SP.Atk</string>
+    <string name="sp_def">SP.Def</string>
+    <string name="speed">Speed</string>
+    <string name="total">Total</string>
+    <string name="heightValue">1.70 m</string>
+    <string name="weightValue">90.5 kg</string>
+    <string name="abilityValue">Blaze, Solar Power</string>
+    <string name="evolution_chain">Evolution Chain</string>
 </resources>

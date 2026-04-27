@@ -1,21 +1,17 @@
 package com.example.pokedex.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.Model.DataPokemon
-import com.example.pokedex.CustomViews.PokemonCardView
+import com.example.pokedex.activities.DetailPokemonActivity
 import com.example.pokedex.databinding.ItemPokemonDapterBinding
 
 class PokemonAdapter(private val list: List<DataPokemon>) :
     RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
-    private var delegateDetail: DelegateClickDeltail? = null
+
     private lateinit var types: List<String>
-    fun setDelegateDetail(delegateClickDeltail: DelegateClickDeltail) {
-        this.delegateDetail = delegateClickDeltail
-    }
-
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -33,12 +29,11 @@ class PokemonAdapter(private val list: List<DataPokemon>) :
             viTri.types,
             viTri.imageUrl
         )
-        holder.binding.pokemonCardView.setDelegate(object : PokemonCardView.DetailPokemon {
-            override fun clickDetailPokemon(id: Int, name: String) {
-                delegateDetail?.clickDetailPokemon(id, name)
-            }
-
-        })
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailPokemonActivity::class.java)
+            intent.putExtra("POKE_DATA", viTri)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -48,7 +43,5 @@ class PokemonAdapter(private val list: List<DataPokemon>) :
     inner class ViewHolder(val binding: ItemPokemonDapterBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    interface DelegateClickDeltail {
-        fun clickDetailPokemon(id: Int, name: String)
-    }
+
 }
